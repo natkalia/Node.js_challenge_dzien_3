@@ -3,11 +3,10 @@
 // 4f9fa8f98650091c4910f5b597773c0a48278cfb001fe4eb3ff47ada85cbf0ed3dc17016b031e1459e6e4d9b001ab6e102c11e834a98dce9530c9668c47b76ee6f09d075d19a38e48b415e067c6ddcfad0d3526c405a4f4f2fb1e7502f303c40
 
 const crypto = require('crypto');
-
 const ENCRYPTED_TEXT = '4f9fa8f98650091c4910f5b597773c0a48278cfb001fe4eb3ff47ada85cbf0ed3dc17016b031e1459e6e4d9b001ab6e102c11e834a98dce9530c9668c47b76ee6f09d075d19a38e48b415e067c6ddcfad0d3526c405a4f4f2fb1e7502f303c40';
 
-let arrAlg = ['aes192', 'aes-256-cbc', 'aes-256-ecb'];
-let longText  = 'Pobawmy się jak komputerowy Detektyw';
+const arrAlg = ['aes192', 'aes-256-cbc', 'aes-256-ecb'];
+const longText  = 'Pobawmy się jak komputerowy Detektyw';
 let password = '';
 
 function getPassword(x) {
@@ -20,7 +19,7 @@ function getPassword(x) {
 getPassword(longText);
 console.log(`Hasło to: ${password}`);
 
-function encodeTxt(algorithm) {
+function decodeTxt(algorithm) {
   'use strict';
   const decipher = crypto.createDecipher(algorithm, password);
   let decrypted = decipher.update(ENCRYPTED_TEXT, 'hex', 'utf8');
@@ -28,7 +27,7 @@ function encodeTxt(algorithm) {
   console.log(`Użyty alogorytm to ${algorithm} a rezultat to: ${decrypted}`);
 }
 
-//To be solved: problem with error when iterating over algorithms array with a loop, when answer is wrong
+//To be solved: problem with error when iterating over algorithms array with a loop, when answer is wrong (when counter is 0 or 1)
 for (let counter = 2; counter < arrAlg.length; counter++) {
-  encodeTxt(arrAlg[counter]);
+  decodeTxt(arrAlg[counter]);
 }
